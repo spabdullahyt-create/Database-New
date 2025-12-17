@@ -1,0 +1,142 @@
+<!DOCTYPE html><html lang="en"><head>
+  <meta charset="UTF-8">
+  <title>Usman Sim DB Service - Enhanced</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Advanced SIM data lookup tool with automatic network detection for all Pakistani networks.">
+  
+  <script src="js/firebase-app-compat.js"></script>
+  <script src="js/firebase-database-compat.js"></script>
+  
+  <link rel="stylesheet" href="css/all.min.css">
+  
+  <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+  <div class="container">
+    <header class="header">
+      <div class="header-left">
+        <label for="upload" style="cursor: pointer;">
+          <img src="images/4f71a7aa-9e44-450a-922b-cbc42c3da0c6.png" alt="Profile" class="header-logo-img" id="dashboardProfileImage">
+        </label>
+        <input type="file" accept="image/*" id="upload" style="display: none;">
+      </div>
+      
+      <div class="header-center">Usman Sim DB Service</div>
+      <button class="theme-toggle" id="theme-toggle" title="Toggle theme">🌙</button>
+    </header>
+
+    <div class="api-status-bar">
+      <div class="api-badge active" id="apiJazzStatus">
+        <i class="fas fa-circle"></i> Jazz
+      </div>
+      <div class="api-badge active" id="apiTelenorStatus">
+        <i class="fas fa-circle"></i> Telenor
+      </div>
+      <div class="api-badge active" id="apiZongStatus">
+        <i class="fas fa-circle"></i> Zong
+      </div>
+      <div class="api-badge active" id="apiUfoneStatus">
+        <i class="fas fa-circle"></i> Ufone
+      </div>
+      <div class="api-badge active" id="apiCnicStatus">
+        <i class="fas fa-circle"></i> CNIC
+      </div>
+    </div>
+
+    <main class="form-section">
+      <div class="form-group">
+        <label for="phone"><i class="fas fa-search"></i> Enter Phone Number or CNIC</label>
+        <input type="text" id="phone" class="search-input" placeholder="e.g., 03xxxxxxxxxxx or 1234512345678" autocomplete="off">
+        <div class="input-hint">
+          <i class="fas fa-info-circle"></i> System will automatically detect the network
+        </div>
+      </div>
+      
+      <button class="btn btn-primary" id="submit-button">
+        <i class="fas fa-search"></i> Search Database
+      </button>
+      
+      <div class="button-group">
+        <button class="btn btn-secondary" id="clearBtn">
+          <i class="fas fa-broom"></i> Clear
+        </button>
+        <button class="btn btn-secondary" id="truecallerBtn">
+          <i class="fas fa-id-badge"></i> Truecaller
+        </button>
+      </div>
+
+      <button class="btn btn-secondary" id="exportBtn" style="margin-top: 12px; width: 100%;">
+          <i class="fas fa-download"></i> Export Results
+      </button>
+
+      <div class="results-header" style="display: none;" id="resultsHeader">
+        <div class="results-count" id="resultsCount">0 records found</div>
+        <div class="results-actions">
+          <button class="action-btn" id="copyAllBtn">
+            <i class="fas fa-copy"></i> Copy All
+          </button>
+        </div>
+      </div>
+
+      <div id="result">
+        <div class="empty-state">
+          <div class="empty-icon">
+            <i class="fas fa-database"></i>
+          </div>
+          <h3 class="state-title">No Search Yet</h3>
+          <p class="state-message">
+            Enter a phone number or CNIC to search across all Pakistani networks.
+            Results will appear here automatically.
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <h3><i class="fas fa-user-tie"></i> About the Developer</h3>
+        <p>
+          Hi! I'm <strong>Usman</strong>, creator of <strong>Usman Sim DB Service</strong>. 
+          This advanced tool helps you find SIM data securely using CNIC or phone number 
+          with automatic network detection across all Pakistani operators.<br><br>
+          
+          <i class="fas fa-tools"></i> Specialized in web tools, automation services, and secure data solutions.<br><br>
+          
+          <i class="fas fa-comments"></i> For suggestions, collaborations, or custom solutions, feel free to contact me anytime.
+        </p>
+        <a href="https://whatsapp.com/channel/0029Vb6SwB147XeCTHpikc0O" class="chat-bubble" target="_blank" title="Join Whatsapp Channel">
+          <img src="images/telegram.png" alt="Telegram">
+          Join Whatsapp Channel
+        </a>
+      </div>
+    </main>
+  </div>
+
+  <div id="truecallerModal" class="modal">
+    <div class="modal-content">
+      <span class="modal-close" id="closeTcModal">�</span>
+      <div class="truecaller-result" id="truecallerResultDisplay">
+        <h4 id="tcModalTitle"><i class="fas fa-id-badge"></i> Truecaller Result</h4>
+        <div id="tcLoadingState" class="loading-state" style="padding: 20px 0; display: none;">
+            <div class="loading-icon" style="font-size: 30px;">
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+            <p class="state-message" style="margin-bottom: 0;">Searching...</p>
+        </div>
+        
+        <div id="tcNameDisplay" style="display: none;">---</div>
+        <div id="tcSimDisplay" style="display: none;">Unknown SIM</div>
+        <p style="margin-top: 15px; font-size: 13px; color: var(--gray);">Data provided by Truecaller API</p>
+      </div>
+    </div>
+  </div>
+
+  <a href="https://whatsapp.com/channel/0029Vb6SwB147XeCTHpikc0O" target="_blank" title="Join Whatsapp Channel" id="floatingTelegram">
+    <img src="images/telegram.png" alt="Telegram Logo">
+  </a>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="js/script.js"></script>
+
+</body></html>
